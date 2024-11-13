@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Checklist with Multiple Columns</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between; /* Space out columns evenly */
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+            gap: 20px; /* Add space between columns */
+            margin-top: 20px;
+        }
+
+        .column {
+            width: 22%; /* Set width for each column */
+            min-width: 250px; /* Prevent columns from becoming too narrow */
+            padding: 10px;
+            background-color: #f4f4f4;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .column h2 {
+            text-align: center;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        #checklist {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #checklist li {
+            margin: 10px 0;
+            font-size: 18px;
+            padding: 5px;
+            cursor: pointer;
+        }
+
+        input[type="checkbox"]:checked + span {
+            background-color: #d4edda;
+            color: #155724;
+            text-decoration: line-through;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .remove-all {
+            background-color: #f44336; /* Red */
+        }
+
+        .remove-all:hover {
+            background-color: #e53935;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Interactive Checklist - As a Critical Friend</h1>
+    <div class="container">
+        <!-- Column 1: Soups -->
+        <div class="column">
+            <h2>As a Critical Friend – Soups</h2>
+            <ul id="checklist1">
+                <li><input type="checkbox" id="task1"> <span>Suggest analyses</span></li>
+                <li><input type="checkbox" id="task2"> <span>Provoke reflection</span></li>
+                <li><input type="checkbox" id="task3"> <span>Provide study/organisation tips</span></li>
+            </ul>
+        </div>
+
+        <!-- Column 2: Entrees -->
+        <div class="column">
+            <h2>Getting Started – Entrees</h2>
+            <ul id="checklist2">
+                <li><input type="checkbox" id="task4"> <span>Suggesting structure</span></li>
+                <li><input type="checkbox" id="task5"> <span>Brainstorming ideas</span></li>
+                <li><input type="checkbox" id="task6"> <span>Engaging with literature</span></li>
+            </ul>
+        </div>
+
+        <!-- Column 3: Bread Service -->
+        <div class="column">
+            <h2>Engaging with Literature – Bread Service</h2>
+            <ul id="checklist3">
+                <li><input type="checkbox" id="task7"> <span>Suggesting search terms</span></li>
+                <li><input type="checkbox" id="task8"> <span>Performing searches</span></li>
+                <li><input type="checkbox" id="task9"> <span>Summarising literature</span></li>
+                <li><input type="checkbox" id="task10"> <span>Identifying methodologies</span></li>
+                <li><input type="checkbox" id="task11"> <span>Explaining jargon</span></li>
+                <li><input type="checkbox" id="task12"> <span>Fixing reference list</span></li>
+            </ul>
+        </div>
+
+        <!-- Column 4: Mains -->
+        <div class="column">
+            <h2>Generating Content – Mains</h2>
+            <ul id="checklist4">
+                <li><input type="checkbox" id="task13"> <span>Writing some text</span></li>
+                <li><input type="checkbox" id="task14"> <span>Making images, video, audio</span></li>
+                <li><input type="checkbox" id="task15"> <span>Making slidedecks</span></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Column 5: Lighter Mains -->
+        <div class="column">
+            <h2>Analyses – Lighter Mains</h2>
+            <ul id="checklist5">
+                <li><input type="checkbox" id="task16"> <span>Performing analyses of data, text</span></li>
+                <li><input type="checkbox" id="task17"> <span>Suggesting counterarguments</span></li>
+            </ul>
+        </div>
+
+        <!-- Column 6: Coffees -->
+        <div class="column">
+            <h2>Editing – Coffees</h2>
+            <ul id="checklist6">
+                <li><input type="checkbox" id="task18"> <span>Editing tone</span></li>
+                <li><input type="checkbox" id="task19"> <span>Improving clarity and readability</span></li>
+                <li><input type="checkbox" id="task20"> <span>Fixing grammar</span></li>
+                <li><input type="checkbox" id="task21"> <span>Shortening</span></li>
+            </ul>
+        </div>
+
+        <!-- Column 7: Desserts -->
+        <div class="column">
+            <h2>Feedback – Desserts</h2>
+            <ul id="checklist7">
+                <li><input type="checkbox" id="task22"> <span>On all of the above elements</span></li>
+                <li><input type="checkbox" id="task23"> <span>Specifically on rubric criteria</span></li>
+            </ul>
+        </div>
+    </div>
+
+    <div style="text-align: center;">
+        <button id="removeAll" class="remove-all">Remove All</button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get all checklist columns
+            const checklists = [
+                { id: 'checklist1', tasks: ['task1', 'task2', 'task3'] },
+                { id: 'checklist2', tasks: ['task4', 'task5', 'task6'] },
+                { id: 'checklist3', tasks: ['task7', 'task8', 'task9', 'task10', 'task11', 'task12'] },
+                { id: 'checklist4', tasks: ['task13', 'task14', 'task15'] },
+                { id: 'checklist5', tasks: ['task16', 'task17'] },
+                { id: 'checklist6', tasks: ['task18', 'task19', 'task20', 'task21'] },
+                { id: 'checklist7', tasks: ['task22', 'task23'] }
+            ];
+
+            // Function to update item styles based on the checkbox state
+            function updateItemStyle(checkbox) {
+                const listItem = checkbox.parentElement;
+                if (checkbox.checked) {
+                    listItem.classList.add('highlighted');
+                } else {
+                    listItem.classList.remove('highlighted');
+                }
+            }
+
+            // Load checklist state from localStorage
+            function loadChecklistState(checklist) {
+                checklist.tasks.forEach(taskId => {
+                    const checkbox = document.getElementById(taskId);
+                    if (checkbox) {
+                        const isChecked = localStorage.getItem(taskId) === 'true';
+                        checkbox.checked = isChecked;
+                        updateItemStyle(checkbox);
+                    }
+                });
+            }
+
+            // Save checklist state to localStorage
+            function saveChecklistState(checklist) {
+                checklist.tasks.forEach(taskId => {
+                    const checkbox = document.getElementById(taskId);
+                    localStorage.setItem(taskId, checkbox.checked);
+                });
+            }
+
+            // Event listener to save state on checkbox change
+            checklists.forEach(checklist => {
+                checklist.tasks.forEach(taskId => {
+                    const checkbox = document.getElementById(taskId);
+                    if (checkbox) {
+                        checkbox.addEventListener('change', function() {
+                            updateItemStyle(this);
+                            saveChecklistState(checklist); // Save state when changed
+                        });
+                    }
+                });
+            });
+
+            // Event listener for "Remove All" button
+            document.getElementById('removeAll').addEventListener('click', function() {
+                checklists.forEach(checklist => {
+                    checklist.tasks.forEach(taskId =>
